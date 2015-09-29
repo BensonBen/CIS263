@@ -106,24 +106,24 @@ int main() {
     //We chose to use a vector for the integer array because, they're more elegant and modern.
     // (;-)
     
-    //    cout << "Starting algorithm 1."<<endl;
-    //    /************************************
-    //     * Algorithm 1.
-    //     ***********************************/
-    //    chrono::time_point<chrono::system_clock> start, end;
-    //    start = chrono::system_clock::now();
-    //
-    //    for(int i =0; i<10; ++i){
-    //        generate_alg_one(2000);
-    //        for(auto c = alg_one.begin(); c!=alg_one.end(); ++c){
-    //            cout << to_string(*c)<<endl;
-    //        }
-    //        alg_one.clear();
-    //    }
-    //
-    //    end = chrono::system_clock::now();
-    //    chrono::duration<double> elapse = (end - start)/10;
-    //    cout << "Elapse time is " << elapse.count() << endl;
+        cout << "Starting algorithm 1."<<endl;
+        /************************************
+         * Algorithm 1.
+         ***********************************/
+        chrono::time_point<chrono::system_clock> start, end;
+        start = chrono::system_clock::now();
+    
+        for(int i =0; i<10; ++i){
+            generate_alg_one(2000);
+            for(auto c = alg_one.begin(); c!=alg_one.end(); ++c){
+                cout << to_string(*c)<<endl;
+            }
+            alg_one.clear();
+        }
+    
+        end = chrono::system_clock::now();
+        chrono::duration<double> elapse = (end - start)/10;
+        cout << "Elapse time is " << elapse.count() << endl;
     
     
     //    cout << "Starting Algorithm 2. ";
@@ -153,24 +153,24 @@ int main() {
     //    initliaze_int_arr(10, &used_array);
     //    //   alg_two_point_one();
     //
-    cout << "Starting Algorithm 3. ";
-    chrono::time_point<chrono::system_clock> start, end;
-    start = chrono::system_clock::now();
-    
-    /*************************************
-     * Algorithm 3.
-     ************************************/
-    for(int i = 0; i< 10; ++i){
-        initliaze_int_arr(6400000, &integer_array);
-        
-        for(int i =1; i<integer_array.size(); ++i){
-            swap(integer_array[i], integer_array[randInt(i)]);
-        }
-        integer_array.clear();
-    }
-    end = chrono::system_clock::now();
-    chrono::duration<double> elapse = (end - start)/10;
-    cout << "Elapse time is " << elapse.count() << endl;
+//    cout << "Starting Algorithm 3. ";
+//    chrono::time_point<chrono::system_clock> start, end;
+//    start = chrono::system_clock::now();
+//    
+//    /*************************************
+//     * Algorithm 3.
+//     ************************************/
+//    for(int i = 0; i< 10; ++i){
+//        initliaze_int_arr(6400000, &integer_array);
+//        
+//        for(int i =1; i<integer_array.size(); ++i){
+//            swap(integer_array[i], integer_array[randInt(i)]);
+//        }
+//        integer_array.clear();
+//    }
+//    end = chrono::system_clock::now();
+//    chrono::duration<double> elapse = (end - start)/10;
+//    cout << "Elapse time is " << elapse.count() << endl;
     
     return 0;
 }

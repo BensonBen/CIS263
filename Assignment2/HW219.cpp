@@ -1,13 +1,7 @@
-//
-//  HW219.cpp
-//  Max_Subsequence
-//
-//  Created by Benjamin J. Benson on 9/27/15.
-//  Copyright (c) 2015 Benjamin J. Benson. All rights reserved.
-//
-
 #include <vector>
 #include <iostream>
+#include <tuple>
+
 using namespace std;
 class max_sub_sum{
 private:
@@ -15,74 +9,96 @@ private:
 public:
     
     max_sub_sum(){
-        cout<<"fuck this shit."<<endl;
     }
     
-    int maxSumRec(const std::vector<int> a, int left, int right)
+    tuple<int, int, int> maxSumRec(const vector<int> a, int left, int right)
     {
         if(left == right)
             if(a[left]>0)
                 return a[left];
         else
             return 0;
-    
+        
         
         int center = (left +right)/2;
-        int maxLeftSum = maxSumRec(a, left, center);
-        int maxRightSum = maxSumRec(a, center+1, right);
+        
+        auto maxLeftSum = maxSumRec(a, left, center);
+        
+        auto maxRightSum = maxSumRec(a, center+1, right);
         
         int maxLeftBorderSum = 0, leftBorderSum = 0;
+        
+        tuple<int, int, int> temp;
+        
         for(int i = center; i>=left; --i){
             leftBorderSum += a[i];
             if(leftBorderSum>maxLeftBorderSum){
                 maxLeftBorderSum = leftBorderSum;
+                temp = make_tuple(maxLeftBorderSum, i, left);
             }
         }
         
         int maxRightBorderSum = 0, rightBorderSum = 0;
+        tuple<int, int, int> temp_tuple_right = NULL;
+        
         for(int j = center+1; j<=right; ++j){
+            
             rightBorderSum += a[j];
+            
             if(rightBorderSum > maxRightBorderSum){
+                
                 maxRightBorderSum = rightBorderSum;
+                
+                temp_tuple_right= make_tuple(maxRightBorderSum, j, right);
             }
         }
         
-        return max3(maxLeftSum, maxRightSum, maxLeftBorderSum+maxRightBorderSum);
+        tuple<int, int, int> max_middle = tuple_finder(temp, temp_tuple_right);
+    
+        
+        return max3(temp, temp_tuple_right, max_middle);
     }
     
-    int max3(int maxLeftSum, int maxRightSum, int borderSum){
-        int result = 0;
-        if(maxLeftSum >= maxRightSum){
-            result = maxLeftSum;
+    tuple <int, int, int>tuple_finder(tuple <int, int, int> left, tuple<int, int, int> right){
+        int temp = get<0>(left) + get<0>(right);
+        
+        return make_tuple(temp, get<1>(left), get<1>(right));
+    }
+    
+    void print(tuple<int, int, int> temp){
+        cout << get<0>(temp)<<endl;
+        cout << get<1>(temp)<<endl;
+        cout<< get<2>(temp)<<"\n"<<endl;
+    }
+    
+    tuple<int, int, int> max3(tuple<int, int, int> left, tuple<int, int, int> right, tuple<int, int, int> middle ){
+        
+        vector <tuple<int, int, int>> temp;
+        
+        temp.push_back(left);
+        temp.push_back(right);
+        temp.push_back(middle);
+        
+        tuple<int, int, int> t = temp.at(0);
+        
+        for(int i =0; i<temp.size(); ++i){
+            if(get<0>(temp.at(i)) >= get<0>(t)){
+                t = make_tuple(get<0>(temp.at(i)) ,get<1>(temp.at(i)) ,get<2>(temp.at(i)));
+            }
         }
-        if(maxLeftSum >= borderSum){
-            result = maxLeftSum;
-        }
-        if(maxRightSum >= maxLeftSum){
-            result = maxRightSum;
-        }
-        if(maxRightSum >=borderSum){
-            result = maxRightSum;
-        }
-        if(borderSum >= maxRightSum){
-            result = borderSum;
-        }
-        if(borderSum >= maxLeftSum){
-            result = borderSum;
-        }
-        return result;
+        
+        return t;
     }
     
     
 };
 
-
-
-
 int main(){
-    std::vector <int> hello = {10, -10000, 20, 40, -39};
+    std::vector <int> hello = {10, -700000, 20, -39};
     max_sub_sum m;
-    int temp = m.maxSumRec(hello, 0, hello.size()-1);
-    std::cout << std::to_string(temp);
+    auto temp = m.maxSumRec(hello, 0, hello.size()-1);
+    std::cout << std::to_string(get<0>(temp))<<endl;
+    std::cout << std::to_string(get<1>(temp))<<endl;
+    std::cout<< std::to_string(get<2>(temp))<<endl;
     return 0;
 }
