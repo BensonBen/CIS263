@@ -106,8 +106,8 @@ int main() {
     //We chose to use a vector for the integer array because, they're more elegant and modern.
     // (;-)
     
-        cout << "Starting algorithm 1."<<endl;
-        /************************************
+    cout << "Starting algorithm 1."<<endl;
+    /************************************
          * Algorithm 1.
          ***********************************/
         chrono::time_point<chrono::system_clock> start, end;
@@ -126,61 +126,55 @@ int main() {
         cout << "Elapse time is " << elapse.count() << endl;
     
     
-    //    cout << "Starting Algorithm 2. ";
-    //    chrono::time_point<chrono::system_clock> start, end;
-    //    start = chrono::system_clock::now();
-    //
-    //    /*************************************
-    //     * Algorithm 2
-    //     *************************************/
-    //    while(is_used()==false){
-    //        int rand = random()%400000;
-    //        if(b_array[rand]==false){
-    //            i_array.push_back(rand+1);
-    //            ++i;
-    //            b_array[rand]=true;
-    //        }
-    //    }
-    //
-    //    end = chrono::system_clock::now();
-    //    chrono::duration<double> elapse = (end - start);
-    //    cout << "Elapse time is " << elapse.count() << endl;
+    cout << "Starting Algorithm 2. ";
+    chrono::time_point<chrono::system_clock> start, end;
+    start = chrono::system_clock::now();
+
+    /*************************************
+     * Algorithm 2
+     *************************************/
+    while(is_used()==false){
+        int rand = random()%400000;
+        if(b_array[rand]==false){
+            i_array.push_back(rand+1);
+            ++i;
+            b_array[rand]=true;
+        }
+    }
+
+    end = chrono::system_clock::now();
+    chrono::duration<double> elapse = (end - start);
+    cout << "Elapse time is " << elapse.count() << endl;
     
     
-    //    /**************************************
-    //     * Algorithm 2.1
-    //     **************************************/
-    //    initliaze_int_arr(10, &used_array);
-    //    //   alg_two_point_one();
-    //
-//    cout << "Starting Algorithm 3. ";
-//    chrono::time_point<chrono::system_clock> start, end;
-//    start = chrono::system_clock::now();
-//    
-//    /*************************************
-//     * Algorithm 3.
-//     ************************************/
-//    for(int i = 0; i< 10; ++i){
-//        initliaze_int_arr(6400000, &integer_array);
-//        
-//        for(int i =1; i<integer_array.size(); ++i){
-//            swap(integer_array[i], integer_array[randInt(i)]);
-//        }
-//        integer_array.clear();
-//    }
-//    end = chrono::system_clock::now();
-//    chrono::duration<double> elapse = (end - start)/10;
-//    cout << "Elapse time is " << elapse.count() << endl;
+    cout << "Starting Algorithm 3. ";
+    chrono::time_point<chrono::system_clock> start, end;
+    start = chrono::system_clock::now();
+    
+    /*************************************
+     * Algorithm 3.
+     ************************************/
+    for(int i = 0; i< 10; ++i){
+        initliaze_int_arr(6400000, &integer_array);
+        
+        for(int i =1; i<integer_array.size(); ++i){
+            swap(integer_array[i], integer_array[randInt(i)]);
+        }
+        integer_array.clear();
+    }
+    end = chrono::system_clock::now();
+    chrono::duration<double> elapse = (end - start)/10;
+    cout << "Elapse time is " << elapse.count() << endl;
     
     return 0;
 }
 
 //2.8 b)
 /*******************************************************************************
- * algorithm 1 has a run time of best case O(n) and worst case O (x    infinity)
- *                                                                   ->
- * algorithm 2 has a run time of best case O(n) worst case O(x  infinity)
- *                                                            ->
+ * algorithm 1 has a run time of best case O(n^2) and worst case O (x    infinity)
+ *                                                                    ->
+ * algorithm 2 has a run time of best case O(nlog(n)) worst case O(x  infinity)
+ *                                                                  ->
  * algorithm 3 has a run time of O(n)
  *******************************************************************************/
 
@@ -224,9 +218,11 @@ int main() {
 
 //2.8 e)
 /**************************************************************
- * The worst case run time is c^n for algorithm 1.
+ * The worst case run time is n^2 for algorithm 1.
  *
- * The worst case run time is c^n for algorithm 2.
+ * The worst case run time is nlog(n) to infinity 
+ * because you could generate the same random number
+ * evertime for algorithm 2.
  *
- * The worst case run time is O(n) for algorithm 3.
+ * The worst case run time is O(2n) for algorithm 3.
  *************************************************************/

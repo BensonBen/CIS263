@@ -3,6 +3,7 @@
 #include <tuple>
 
 using namespace std;
+
 class max_sub_sum{
 private:
     std::vector <int> positions;
@@ -15,9 +16,9 @@ public:
     {
         if(left == right)
             if(a[left]>0)
-                return a[left];
+                return make_tuple(a[left], left, left+1);
             else
-                return 0;
+                return make_tuple(a[left],0,1);
         
         
         int center = (left +right)/2;
@@ -53,9 +54,6 @@ public:
         }
         
         tuple<int, int, int> max_middle = tuple_finder(temp, temp_tuple_right);
-        //        print(temp);
-        //        print(temp_tuple_right);
-        //        print(max_middle);
         
         return max3(&temp, &temp_tuple_right, &max_middle,&maxLeftSum, &maxRightSum);
     }
@@ -101,7 +99,7 @@ public:
 };
 
 int main(){
-    std::vector <int> hello = {10, 800, 20,-89, 0, 40, 50, -39};
+    std::vector <int> hello = {90};
     max_sub_sum m;
     auto temp = m.maxSumRec(hello, 0, hello.size()-1);
     std::cout << std::to_string(get<0>(temp))<<endl;
